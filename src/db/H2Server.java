@@ -9,6 +9,12 @@ import java.io.File;
  */
 public final class H2Server {
 
+	// -------------------- Private Static Methods --------------------
+
+	private static void setupDBObjects() {
+
+	}
+
 	// -------------------- Main --------------------
 
 	public static void main(String[] args) {
