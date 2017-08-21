@@ -1,7 +1,10 @@
 package entities;
 
+import hibernate.ExampleEntityListener;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +16,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="ENTITY")
+@EntityListeners(value=ExampleEntityListener.class)
 public class ExampleEntityWithListener {
 
 	// -------------------- Private Variables --------------------
@@ -33,6 +37,24 @@ public class ExampleEntityWithListener {
 
 	@Column(name="CREATION_DATE", nullable=false)
 	private Date creationDate;
+
+	// -------------------- Public Methods --------------------
+
+	public void setUUID(final String uuid) {
+		this.uuid = uuid;
+	}
+
+	public void setaBoolean(final Boolean aBoolean) {
+		this.aBoolean = aBoolean;
+	}
+
+	public void setLastUpdate(final Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public void setCreationDate(final Date creationDate) {
+		this.creationDate = creationDate;
+	}
 
 	// -------------------- Overridden Methods --------------------
 
