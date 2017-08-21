@@ -28,9 +28,6 @@ public class ExampleEntityWithHooks {
 	@Column(name="UUID", nullable=false, unique=true)
 	private String uuid;
 
-	@Column(name="A_BOOLEAN", nullable=false)
-	private Boolean aBoolean;
-
 	@Column(name="LAST_UPDATE_DATE", nullable=false)
 	private Date lastUpdate;
 
@@ -53,10 +50,6 @@ public class ExampleEntityWithHooks {
 
 	public void setUUID(final String uuid) {
 		this.uuid = uuid;
-	}
-
-	public void setaBoolean(final Boolean aBoolean) {
-		this.aBoolean = aBoolean;
 	}
 
 	public void setLastUpdate(final Date lastUpdate) {
