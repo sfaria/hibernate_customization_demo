@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="ENTITY")
-public class EntityWithAnnotations {
+public class ExampleEntityWithInterceptor {
 
 	// -------------------- Private Variables --------------------
 
@@ -34,13 +34,51 @@ public class EntityWithAnnotations {
 	@Column(name="CREATION_DATE", nullable=false)
 	private Date creationDate;
 
+	// -------------------- Public Methods --------------------
+
+	public void setUUID(final String uuid) {
+		this.uuid = uuid;
+	}
+
+	public void setaBoolean(final Boolean aBoolean) {
+		this.aBoolean = aBoolean;
+	}
+
+	public void setLastUpdate(final Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public void setCreationDate(final Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public Boolean getaBoolean() {
+		return aBoolean;
+	}
+
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
 	// -------------------- Overridden Methods --------------------
 
 	@Override
 	public final boolean equals(final Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		final EntityWithAnnotations that = (EntityWithAnnotations) o;
+		final ExampleEntityWithInterceptor that = (ExampleEntityWithInterceptor) o;
 		return id.equals(that.id);
 	}
 

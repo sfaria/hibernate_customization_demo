@@ -1,5 +1,8 @@
 package db;
 
+import hibernate.ExampleInterceptor;
+import org.hibernate.SessionFactory;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -20,7 +23,7 @@ public final class JPA {
 	// -------------------- Public Static Methods --------------------
 
 	public static final <T> T execute(F<EntityManager, T> function) {
-		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		EntityManager em = createEntityManager();
 		EntityTransaction transaction = em.getTransaction();
 		try {
 			T result = function.apply(em);
@@ -33,6 +36,15 @@ public final class JPA {
 			em.close();
 			throw new RuntimeException(ex);
 		}
+	}
+
+	// -------------------- Private Methods --------------------
+
+	private static EntityManager createEntityManager() {
+		SessionFactory sf = ENTITY_MANAGER_FACTORY.unwrap(SessionFactory.class);
+		return sf.withOptions()
+				.interceptor(new ExampleInterceptor())
+				.openSession();
 	}
 
 	// -------------------- Inner Classes --------------------
