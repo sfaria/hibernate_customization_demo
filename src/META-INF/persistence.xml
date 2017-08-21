@@ -7,6 +7,7 @@
         <class>entities.ExampleEntityWithListener</class>
         <class>entities.ExampleEntityWithHooks</class>
         <class>entities.ExampleEntityWithInterceptor</class>
+        <class>entities.ExampleEntityWithAnnotations</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/./db"/>

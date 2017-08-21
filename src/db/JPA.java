@@ -1,6 +1,6 @@
 package db;
 
-import hibernate.ExampleInterceptor;
+import hibernate.ExampleAnnotationBasedInterceptor;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
@@ -43,7 +43,8 @@ public final class JPA {
 	private static EntityManager createEntityManager() {
 		SessionFactory sf = ENTITY_MANAGER_FACTORY.unwrap(SessionFactory.class);
 		return sf.withOptions()
-				.interceptor(new ExampleInterceptor())
+//				.interceptor(new ExampleInterceptor())
+				.interceptor(new ExampleAnnotationBasedInterceptor())
 				.openSession();
 	}
 
