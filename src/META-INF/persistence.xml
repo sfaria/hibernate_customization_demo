@@ -3,6 +3,9 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
         <class>entities.ExampleEntity</class>
+        <class>entities.ExampleEntityWithHooks</class>
+        <class>entities.ExampleEntityWithListener</class>
+        <class>entities.ExampleEntityWithHooks</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/./db"/>

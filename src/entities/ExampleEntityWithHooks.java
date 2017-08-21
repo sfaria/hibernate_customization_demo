@@ -13,12 +13,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name="ENTITY")
-public class ExampleEntity {
+public class ExampleEntityWithHooks {
 
 	// -------------------- Private Variables --------------------
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column(name="ENTITY_ID", unique=true, nullable=false)
 	private Long id;
 
@@ -40,7 +40,7 @@ public class ExampleEntity {
 	public final boolean equals(final Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		final ExampleEntity that = (ExampleEntity) o;
+		final ExampleEntityWithHooks that = (ExampleEntityWithHooks) o;
 		return id.equals(that.id);
 	}
 
@@ -48,4 +48,5 @@ public class ExampleEntity {
 	public final int hashCode() {
 		return id.hashCode();
 	}
+
 }

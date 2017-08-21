@@ -25,7 +25,7 @@ public final class H2Server {
 			stmt.execute("" +
 				"create table entity (\n" +
 				"  entity_id integer not null primary key,\n" +
-				"  entity_guid varchar2(100),\n" +
+				"  uuid varchar2(100),\n" +
 				"  a_boolean varchar2(1),\n" +
 				"  last_update_date date not null,\n" +
 				"  creation_date date not null\n" +
