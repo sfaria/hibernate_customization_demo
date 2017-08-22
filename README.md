@@ -1,1 +1,0 @@
-# hibernate_customization_demo
