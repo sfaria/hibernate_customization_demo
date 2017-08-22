@@ -47,15 +47,14 @@ public final class H2Server {
 				"  entity_id integer not null primary key,\n" +
 				"  uuid varchar2(36),\n" +
 				"  a_boolean varchar2(1),\n" +
-				"  last_update_date date not null,\n" +
-				"  creation_date date not null\n" +
+				"  last_update_date timestamp not null,\n" +
+				"  creation_date timestamp not null\n" +
 				")");
 		}
 	}
 
 	private static void runSimpleQueries() {
 		ExampleEntity entity = JPA.execute(em -> {
-			em.getTransaction().begin();
 			ExampleEntity e = new ExampleEntity();
 
 			e.setABoolean("Y");
@@ -64,8 +63,6 @@ public final class H2Server {
 			e.setUuid(UUID.randomUUID().toString());
 
 			em.persist(e);
-			em.getTransaction().commit();
-			em.refresh(e);
 			return e;
 		});
 
@@ -76,54 +73,76 @@ public final class H2Server {
 
 	private static void runQueriesWithHooks() {
 		ExampleEntityWithHooks entity = JPA.execute(em -> {
-			em.getTransaction().begin();
 			ExampleEntityWithHooks e = new ExampleEntityWithHooks();
-
 			e.setABoolean("Y");
-
 			em.persist(e);
-			em.getTransaction().commit();
-			em.refresh(e);
 			return e;
 		});
 
 		System.err.println("====================== ExampleEntityWithHooks ======================");
 		System.err.println(entity);
+		System.err.println("");
+		System.err.println("After update:");
+		System.err.println("");
+
+		final long entityId = entity.getId();
+		entity = JPA.execute(em -> {
+			ExampleEntityWithHooks e = em.find(ExampleEntityWithHooks.class, entityId);
+			e.setABoolean("F");
+			return em.merge(e);
+		});
+
+		System.err.println(entity);
 		System.err.println("====================================================================");
+
 	}
 
 	private static void runQueriesWithInterceptor() {
 		ExampleEntityWithInterceptor entity = JPA.execute(em -> {
-			em.getTransaction().begin();
 			ExampleEntityWithInterceptor e = new ExampleEntityWithInterceptor();
-
 			e.setABoolean(true);
-
 			em.persist(e);
-			em.getTransaction().commit();
-			em.refresh(e);
 			return e;
 		}, new ExampleInterceptor());
 
 		System.err.println("====================== ExampleEntityWithInterceptor ======================");
+		System.err.println(entity);
+		System.err.println("");
+		System.err.println("After update:");
+		System.err.println("");
+
+		final long entityId = entity.getId();
+		entity = JPA.execute(em -> {
+			ExampleEntityWithInterceptor e = em.find(ExampleEntityWithInterceptor.class, entityId);
+			e.setABoolean(false);
+			return em.merge(e);
+		}, new ExampleInterceptor());
+
 		System.err.println(entity);
 		System.err.println("==========================================================================");
 	}
 
 	private static void runQueriesWithAnnotations() {
 		ExampleEntityWithAnnotations entity = JPA.execute(em -> {
-			em.getTransaction().begin();
 			ExampleEntityWithAnnotations e = new ExampleEntityWithAnnotations();
-
 			e.setABoolean(true);
-
 			em.persist(e);
-			em.getTransaction().commit();
-			em.refresh(e);
 			return e;
 		}, new ExampleAnnotationBasedInterceptor());
 
 		System.err.println("====================== ExampleEntityWithAnnotations ======================");
+		System.err.println(entity);
+		System.err.println("");
+		System.err.println("After update:");
+		System.err.println("");
+
+		final long entityId = entity.getId();
+		entity = JPA.execute(em -> {
+			ExampleEntityWithAnnotations e = em.find(ExampleEntityWithAnnotations.class, entityId);
+			e.setABoolean(false);
+			return em.merge(e);
+		}, new ExampleAnnotationBasedInterceptor());
+
 		System.err.println(entity);
 		System.err.println("==========================================================================");
 	}

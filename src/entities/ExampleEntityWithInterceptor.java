@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -29,37 +32,23 @@ public class ExampleEntityWithInterceptor {
 	private String aBoolean;
 
 	@Column(name="LAST_UPDATE_DATE", nullable=false)
+	@Temporal(value= TemporalType.TIMESTAMP)
 	private Date lastUpdate;
 
 	@Column(name="CREATION_DATE", nullable=false)
+	@Temporal(value= TemporalType.TIMESTAMP)
 	private Date creationDate;
 
 	// -------------------- Getters --------------------
 
-	public String getUuid() {
-		return uuid;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
+	public Long getId() {
+		return id;
 	}
 
 	// -------------------- Setters --------------------
 
 	public void setABoolean(final Boolean aBoolean) {
 		this.aBoolean = aBoolean ? "Y" : "N";
-	}
-
-	public void setUUID(final String uuid) {
-		this.uuid = uuid;
-	}
-
-	public void setLastUpdate(final Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public void setCreationDate(final Date creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	// -------------------- Overridden Methods --------------------
@@ -79,13 +68,15 @@ public class ExampleEntityWithInterceptor {
 
 	@Override
 	public final String toString() {
-		final StringBuilder sb = new StringBuilder("ExampleEntityWithInterceptor {\n");
+		final StringBuilder sb = new StringBuilder("ExampleEntityWithInterceptorAnnotations {\n");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		sb.append("\tid=").append(id);
 		sb.append("\n\t").append("uuid='").append(uuid).append('\'');
 		sb.append("\n\t").append("aBoolean='").append(aBoolean).append('\'');
-		sb.append("\n\t").append("lastUpdate=").append(lastUpdate);
-		sb.append("\n\t").append("creationDate=").append(creationDate).append("\n");
+		sb.append("\n\t").append("lastUpdate=").append(formatter.format(lastUpdate));
+		sb.append("\n\t").append("creationDate=").append(formatter.format(creationDate)).append("\n");
 		sb.append('}');
 		return sb.toString();
 	}
+
 }

@@ -26,7 +26,9 @@ public final class JPA {
 		EntityManager em = createEntityManager(interceptor);
 		EntityTransaction transaction = em.getTransaction();
 		try {
+			transaction.begin();
 			T result = function.apply(em);
+			transaction.commit();
 			em.close();
 			return result;
 		} catch (Exception ex) {

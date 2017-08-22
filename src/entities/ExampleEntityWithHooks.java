@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -32,9 +36,11 @@ public class ExampleEntityWithHooks {
 	private String aBoolean;
 
 	@Column(name="LAST_UPDATE_DATE", nullable=false)
+	@Temporal(value= TemporalType.TIMESTAMP)
 	private Date lastUpdate;
 
 	@Column(name="CREATION_DATE", nullable=false)
+	@Temporal(value= TemporalType.TIMESTAMP)
 	private Date creationDate;
 
 	// -------------------- Hibernate Hooks --------------------
@@ -51,7 +57,13 @@ public class ExampleEntityWithHooks {
 		setLastUpdate(new Date());
 	}
 
-	// -------------------- Public Methods --------------------
+	// -------------------- Getters --------------------
+
+	public Long getId() {
+		return id;
+	}
+
+	// -------------------- Setters --------------------
 
 	public void setABoolean(final String aBoolean) {
 		this.aBoolean = aBoolean;
@@ -87,11 +99,12 @@ public class ExampleEntityWithHooks {
 	@Override
 	public final String toString() {
 		final StringBuilder sb = new StringBuilder("ExampleEntityWithHooks {\n");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		sb.append("\tid=").append(id);
 		sb.append("\n\t").append("uuid='").append(uuid).append('\'');
 		sb.append("\n\t").append("aBoolean='").append(aBoolean).append('\'');
-		sb.append("\n\t").append("lastUpdate=").append(lastUpdate);
-		sb.append("\n\t").append("creationDate=").append(creationDate).append("\n");
+		sb.append("\n\t").append("lastUpdate=").append(formatter.format(lastUpdate));
+		sb.append("\n\t").append("creationDate=").append(formatter.format(creationDate)).append("\n");
 		sb.append('}');
 		return sb.toString();
 	}
