@@ -1,8 +1,10 @@
 package entities;
 
+import hibernate.BooleanType;
 import hibernate.Handler;
 import hibernate.PersistenceHook;
 import org.hibernate.HibernateException;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +33,10 @@ public class ExampleEntityWithAnnotations {
 	@PersistenceHook(handlerClass=UUIDHandler.class)
 	@Column(name="UUID", nullable=false, unique=true)
 	private String uuid;
+
+	@Column(name="A_BOOLEAN", nullable=false)
+	@Type(type=BooleanType.NAME)
+	private Boolean aBoolean;
 
 	@PersistenceHook(handlerClass=LastUpdateHandler.class)
 	@Column(name="LAST_UPDATE_DATE", nullable=false)

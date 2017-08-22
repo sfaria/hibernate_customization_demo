@@ -28,6 +28,9 @@ public class ExampleEntityWithHooks {
 	@Column(name="UUID", nullable=false, unique=true)
 	private String uuid;
 
+	@Column(name="A_BOOLEAN", nullable=false)
+	private String aBoolean;
+
 	@Column(name="LAST_UPDATE_DATE", nullable=false)
 	private Date lastUpdate;
 

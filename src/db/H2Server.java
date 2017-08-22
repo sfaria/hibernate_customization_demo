@@ -28,6 +28,7 @@ public final class H2Server {
 				"create table entity (\n" +
 				"  entity_id integer not null primary key,\n" +
 				"  uuid varchar2(36),\n" +
+				"  a_boolean varchar2(1),\n" +
 				"  last_update_date date not null,\n" +
 				"  creation_date date not null\n" +
 				")");
