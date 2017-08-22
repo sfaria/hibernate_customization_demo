@@ -67,4 +67,16 @@ public class ExampleEntity {
 	public final int hashCode() {
 		return id.hashCode();
 	}
+
+	@Override
+	public final String toString() {
+		final StringBuilder sb = new StringBuilder("ExampleEntity {\n");
+		sb.append("\tid=").append(id);
+		sb.append("\n\t").append("uuid='").append(uuid).append('\'');
+		sb.append("\n\t").append("aBoolean='").append(aBoolean).append('\'');
+		sb.append("\n\t").append("lastUpdate=").append(lastUpdate);
+		sb.append("\n\t").append("creationDate=").append(creationDate).append("\n");
+		sb.append('}');
+		return sb.toString();
+	}
 }

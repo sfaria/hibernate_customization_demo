@@ -36,20 +36,8 @@ public class ExampleEntityWithInterceptor {
 
 	// -------------------- Getters --------------------
 
-	public Long getId() {
-		return id;
-	}
-
 	public String getUuid() {
 		return uuid;
-	}
-
-	public Boolean getABoolean() {
-		return "Y".equals(aBoolean);
-	}
-
-	public Date getLastUpdate() {
-		return lastUpdate;
 	}
 
 	public Date getCreationDate() {
@@ -87,5 +75,17 @@ public class ExampleEntityWithInterceptor {
 	@Override
 	public final int hashCode() {
 		return id.hashCode();
+	}
+
+	@Override
+	public final String toString() {
+		final StringBuilder sb = new StringBuilder("ExampleEntityWithInterceptor {\n");
+		sb.append("\tid=").append(id);
+		sb.append("\n\t").append("uuid='").append(uuid).append('\'');
+		sb.append("\n\t").append("aBoolean='").append(aBoolean).append('\'');
+		sb.append("\n\t").append("lastUpdate=").append(lastUpdate);
+		sb.append("\n\t").append("creationDate=").append(creationDate).append("\n");
+		sb.append('}');
+		return sb.toString();
 	}
 }

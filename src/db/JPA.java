@@ -1,6 +1,6 @@
 package db;
 
-import hibernate.ExampleAnnotationBasedInterceptor;
+import org.hibernate.Interceptor;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
@@ -22,8 +22,8 @@ public final class JPA {
 
 	// -------------------- Public Static Methods --------------------
 
-	public static final <T> T execute(F<EntityManager, T> function) {
-		EntityManager em = createEntityManager();
+	public static final <T> T execute(F<EntityManager, T> function, Interceptor interceptor) {
+		EntityManager em = createEntityManager(interceptor);
 		EntityTransaction transaction = em.getTransaction();
 		try {
 			T result = function.apply(em);
@@ -38,13 +38,16 @@ public final class JPA {
 		}
 	}
 
+	public static final <T> T execute(F<EntityManager, T> function) {
+		return execute(function, null);
+	}
+
 	// -------------------- Private Methods --------------------
 
-	private static EntityManager createEntityManager() {
+	private static EntityManager createEntityManager(Interceptor interceptor) {
 		SessionFactory sf = ENTITY_MANAGER_FACTORY.unwrap(SessionFactory.class);
 		return sf.withOptions()
-//				.interceptor(new ExampleInterceptor())
-				.interceptor(new ExampleAnnotationBasedInterceptor())
+				.interceptor(interceptor)
 				.openSession();
 	}
 
