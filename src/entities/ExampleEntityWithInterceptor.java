@@ -34,7 +34,33 @@ public class ExampleEntityWithInterceptor {
 	@Column(name="CREATION_DATE", nullable=false)
 	private Date creationDate;
 
-	// -------------------- Public Methods --------------------
+	// -------------------- Getters --------------------
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public Boolean getABoolean() {
+		return "Y".equals(aBoolean);
+	}
+
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	// -------------------- Setters --------------------
+
+	public void setABoolean(final Boolean aBoolean) {
+		this.aBoolean = aBoolean ? "Y" : "N";
+	}
 
 	public void setUUID(final String uuid) {
 		this.uuid = uuid;
@@ -46,22 +72,6 @@ public class ExampleEntityWithInterceptor {
 
 	public void setCreationDate(final Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getUuid() {
-		return uuid;
-	}
-
-	public Date getLastUpdate() {
-		return lastUpdate;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
 	}
 
 	// -------------------- Overridden Methods --------------------

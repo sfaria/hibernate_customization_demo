@@ -38,7 +38,11 @@ public class ExampleEntityWithListener {
 	@Column(name="CREATION_DATE", nullable=false)
 	private Date creationDate;
 
-	// -------------------- Public Methods --------------------
+	// -------------------- Setters --------------------
+
+	public void setABoolean(final String aBoolean) {
+		this.aBoolean = aBoolean;
+	}
 
 	public void setUUID(final String uuid) {
 		this.uuid = uuid;

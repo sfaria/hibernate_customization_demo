@@ -34,6 +34,25 @@ public class ExampleEntity {
 	@Column(name="CREATION_DATE", nullable=false)
 	private Date creationDate;
 
+	// -------------------- Setters --------------------
+
+	public void setUuid(final String uuid) {
+		this.uuid = uuid;
+	}
+
+	public void setABoolean(final String aBoolean) {
+		this.aBoolean = aBoolean;
+	}
+
+	public void setLastUpdate(final Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public void setCreationDate(final Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+
 	// -------------------- Overridden Methods --------------------
 
 	@Override

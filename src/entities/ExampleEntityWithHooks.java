@@ -51,6 +51,10 @@ public class ExampleEntityWithHooks {
 
 	// -------------------- Public Methods --------------------
 
+	public String getABoolean() {
+		return aBoolean;
+	}
+
 	public void setUUID(final String uuid) {
 		this.uuid = uuid;
 	}

@@ -16,6 +16,7 @@ public class ExampleEntityListener {
 
 	@PrePersist
 	public void beforePersist(ExampleEntityWithListener e) {
+		e.setCreationDate(new Date());
 		e.setUUID(UUID.randomUUID().toString());
 	}
 

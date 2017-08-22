@@ -46,6 +46,12 @@ public class ExampleEntityWithAnnotations {
 	@Column(name="CREATION_DATE", nullable=false)
 	private Date creationDate;
 
+	// -------------------- Setters --------------------
+
+	public void setABoolean(final Boolean aBoolean) {
+		this.aBoolean = aBoolean;
+	}
+
 	// -------------------- Inner Classes --------------------
 
 	public static final class UUIDHandler implements Handler {
@@ -82,16 +88,5 @@ public class ExampleEntityWithAnnotations {
 	@Override
 	public int hashCode() {
 		return id.hashCode();
-	}
-
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder("ExampleEntityWithAnnotations{");
-		sb.append("id=").append(id);
-		sb.append(", uuid='").append(uuid).append('\'');
-		sb.append(", lastUpdate=").append(lastUpdate);
-		sb.append(", creationDate=").append(creationDate);
-		sb.append('}');
-		return sb.toString();
 	}
 }
