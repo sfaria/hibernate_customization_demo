@@ -43,6 +43,12 @@ public class ExampleEntityWithListener {
 	@Temporal(value= TemporalType.TIMESTAMP)
 	private Date creationDate;
 
+	// -------------------- Getters --------------------
+
+	public Long getId() {
+		return id;
+	}
+
 	// -------------------- Setters --------------------
 
 	public void setABoolean(final String aBoolean) {
@@ -88,4 +94,5 @@ public class ExampleEntityWithListener {
 		sb.append('}');
 		return sb.toString();
 	}
+
 }

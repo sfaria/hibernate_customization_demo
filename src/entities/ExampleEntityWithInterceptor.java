@@ -68,7 +68,7 @@ public class ExampleEntityWithInterceptor {
 
 	@Override
 	public final String toString() {
-		final StringBuilder sb = new StringBuilder("ExampleEntityWithInterceptorAnnotations {\n");
+		final StringBuilder sb = new StringBuilder("ExampleEntityWithInterceptor {\n");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		sb.append("\tid=").append(id);
 		sb.append("\n\t").append("uuid='").append(uuid).append('\'');

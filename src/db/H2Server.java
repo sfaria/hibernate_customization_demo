@@ -4,6 +4,7 @@ import entities.ExampleEntity;
 import entities.ExampleEntityWithAnnotations;
 import entities.ExampleEntityWithHooks;
 import entities.ExampleEntityWithInterceptor;
+import entities.ExampleEntityWithListener;
 import hibernate.ExampleAnnotationBasedInterceptor;
 import hibernate.ExampleInterceptor;
 import org.h2.tools.Server;
@@ -67,8 +68,9 @@ public final class H2Server {
 		});
 
 		System.err.println("====================== ExampleEntity ======================");
+		System.err.println("");
 		System.err.println(entity);
-		System.err.println("===========================================================");
+		System.err.println("");
 	}
 
 	private static void runQueriesWithHooks() {
@@ -80,6 +82,7 @@ public final class H2Server {
 		});
 
 		System.err.println("====================== ExampleEntityWithHooks ======================");
+		System.err.println("");
 		System.err.println(entity);
 		System.err.println("");
 		System.err.println("After update:");
@@ -93,8 +96,33 @@ public final class H2Server {
 		});
 
 		System.err.println(entity);
-		System.err.println("====================================================================");
+		System.err.println("");
+	}
 
+	private static void runQueriesWithListener() {
+		ExampleEntityWithListener entity = JPA.execute(em -> {
+			ExampleEntityWithListener e = new ExampleEntityWithListener();
+			e.setABoolean("T");
+			em.persist(e);
+			return e;
+		});
+
+		System.err.println("====================== ExampleEntityWithListener ======================");
+		System.err.println("");
+		System.err.println(entity);
+		System.err.println("");
+		System.err.println("After update:");
+		System.err.println("");
+
+		final long entityId = entity.getId();
+		entity = JPA.execute(em -> {
+			ExampleEntityWithListener e = em.find(ExampleEntityWithListener.class, entityId);
+			e.setABoolean("F");
+			return em.merge(e);
+		});
+
+		System.err.println(entity);
+		System.err.println("");
 	}
 
 	private static void runQueriesWithInterceptor() {
@@ -106,6 +134,7 @@ public final class H2Server {
 		}, new ExampleInterceptor());
 
 		System.err.println("====================== ExampleEntityWithInterceptor ======================");
+		System.err.println("");
 		System.err.println(entity);
 		System.err.println("");
 		System.err.println("After update:");
@@ -119,7 +148,7 @@ public final class H2Server {
 		}, new ExampleInterceptor());
 
 		System.err.println(entity);
-		System.err.println("==========================================================================");
+		System.err.println("");
 	}
 
 	private static void runQueriesWithAnnotations() {
@@ -131,6 +160,7 @@ public final class H2Server {
 		}, new ExampleAnnotationBasedInterceptor());
 
 		System.err.println("====================== ExampleEntityWithAnnotations ======================");
+		System.err.println("");
 		System.err.println(entity);
 		System.err.println("");
 		System.err.println("After update:");
@@ -144,7 +174,7 @@ public final class H2Server {
 		}, new ExampleAnnotationBasedInterceptor());
 
 		System.err.println(entity);
-		System.err.println("==========================================================================");
+		System.err.println("");
 	}
 
 	private static Connection createConnection() throws SQLException {
@@ -171,6 +201,7 @@ public final class H2Server {
 			setupDBObjects();
 			runSimpleQueries();
 			runQueriesWithHooks();
+			runQueriesWithListener();
 			runQueriesWithInterceptor();
 			runQueriesWithAnnotations();
 			System.exit(0);
