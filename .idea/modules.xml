@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hibernate_customization_demo.iml" filepath="$PROJECT_DIR$/hibernate_customization_demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hibernate_customization_demo_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hibernate_customization_demo_main.iml" group="hibernate_customization_demo" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hibernate_customization_demo_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hibernate_customization_demo_test.iml" group="hibernate_customization_demo" />
     </modules>
   </component>
 </project>
